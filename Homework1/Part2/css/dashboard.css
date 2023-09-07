@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Oswald&family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Oswald&family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Oswald&family=Roboto:wght@100&family=Ubuntu:wght@300&display=swap');
+
+
+.headerid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-bottom: 5px solid rgb(219, 219, 219);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#logo {
+    grid-column: 1;
+    align-items: center;
+    width: 250px;
+}
+
+#headerid {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    grid-column: 2;
+    text-align: center;
+}
+
+.profilediv {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+#hname {
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.profiledivname {
+    padding-right: 135px;
+    font-size: 20px;    
+}
+
+#hphoto {
+    padding-right: 25px;
+}
+
+.mainnav {
+    padding-top: 75px;
+    padding-left: 175px;
+    background-color: #e8e8e8;
+    border: 2px solid black;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.one {
+    grid-column: 1;
+}
+
+.two {
+    grid-column: 2;
+}
+
+#three {
+    grid-column: 3;
+}
+
+.four {
+    grid-column: 4;
+}
+
+.five {
+    grid-column: 5;
+}
+
+.extra {
+    padding-top: 50px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+a:hover {
+    color: rgb(132, 183, 255);
+}
+
+.settings {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#sheader {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    grid-row: 1;
+    padding-bottom: 50px;
+    font-size: 28px;
+}
+
+#sbar {
+    text-align: center;
+    grid-row: 2;
+}
+
+#sbarbtn {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.sbarbox {
+    width: 300px;
+    height: 20px;
+}
+
+.account {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.settings2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 165px;
+}
+
+.notifications {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 75px;
+}
+
+.messages {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 90px;
+}
+
+a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: black;
+    
+}
+
+.summary {
+    background-color: rgb(231, 231, 231);
+    border: 5px solid black;
+}
+
+#htags{
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+}
+
+#mtags {
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 16px;
+}
+
+#targtags {
+    text-align: center;
+    border-bottom: 5px solid rgb(96, 96, 96);
+    font-weight: bold;
+}
+
+#targtagsfinal {
+    text-align: center;
+    font-weight: bold;
+}
+
+#htags2 {
+    padding-top: 25px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 25px;
+    font-style: italic;
+    margin: 0;
+}
+
+#infotags {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    margin: 0;
+    padding-bottom: 25px;
+}
+
+#countries {
+    padding-top: 15px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    margin: 0;
+    font-weight: bold;
+    padding-right: 25px;
+}
+
+#countriesinfo {
+    padding-top: 15px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+#infotags2 {
+    padding-top: 40px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    margin: 0;
+    padding-bottom: 25px;
+}
+
+#infotags3 {
+    padding-top: 20px;
+    font-family: 'Robot0', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 25px;
+}
