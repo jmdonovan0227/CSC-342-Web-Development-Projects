@@ -136,7 +136,8 @@ ul li {
 
 /** Change text color to indicate we are hovering over a list item */
 ul li:hover {
-    color: rgb(172, 172, 172);
+    color: white;
+    background-color: gray;
 }
 
 /** Do not show the the bottom border on the last element in the list */
