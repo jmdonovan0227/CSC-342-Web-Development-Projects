@@ -111,13 +111,30 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
                     }
     
                     else {
-                        addNumber( e.key );
+                        // this is catch the f key with numbers from being inserted as valid input
+                        if( !e.key.match( /[a-zA-Z]/ ) ) {
+                            addNumber( e.key );
+                        }
                     }
                 }
 
                 // allow user to solve expression by pressing enter
                 else if( e.key == "Enter" && expression.hasFirst && expression.hasOper && expression.second_number != "" ) {
                     solveExpression();
+                    expression.hasOper = false;
+                    expression.operator = "";
+                }
+
+                // if user uses backspace to clear a value and it is the first number meaning we haven't typed a first number
+                // or an operator just clear the expression
+                else if( e.key == "Backspace" && textBox.value.length == 1 && !expression.hasOper ) {
+                    clearExpression();
+                }
+
+                // if we have a first number and an expression just clear the second number so it doesn't carry over in the expression
+                else if( e.key == "Backspace" && textBox.value.length == 1 && expression.hasOper ) {
+                    // just set the second_number to be empty
+                    expression.second_number = "";
                 }
             }
         }

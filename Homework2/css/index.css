@@ -1,5 +1,4 @@
-/** Import pixelify Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Pixelfy+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&family=Roboto&family=Young+Serif&display=swap');
 
 /** Style our text box */
 #inputfield {
@@ -8,7 +7,7 @@
     border-radius: 6px;
     border: 2px solid rgb(87, 87, 87);
     font-size: 14px;
-    font-family: 'Pixelify Sans', cursive;
+    font-family: 'Roboto', sans-serif;
 }
 
 /** Style text box when in focus */
@@ -35,7 +34,7 @@ button {
     /** set the font size of the button */
     font-size: 14px;
     /** pick a font family for the button, this is a Google Font */
-    font-family: 'Pixelify Sans', cursive;
+    font-family: 'Roboto', sans-serif;
     /** make our mouse a pointer when putting our mouse over the button */
     cursor: pointer;
 }
@@ -121,7 +120,7 @@ ul {
     border: 1px solid black;
     padding: 0;
     overflow-y: scroll;
-    font-family: 'Pixelify Sans', cursive;
+    font-family: 'Roboto', sans-serif;
 }
 
 /** Style our list elements so they look nice and also use a pointer to indicate to the user they can click on results of previous computations */
@@ -158,8 +157,7 @@ ul li:last-child {
 /** Style header for basic calculator*/
 h1 {
     text-align: center;
-    font-family: 'Pixelify Sans', cursive;
-    font-style: italic;
+    font-family: 'Roboto', sans-serif;
 }
 
 /** Round our equals button and make it larger */
