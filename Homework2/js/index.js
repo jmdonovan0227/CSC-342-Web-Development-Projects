@@ -4,7 +4,7 @@ let resultsIdx = 0;
 // keep track of when we need to disable buttons
 let disableButtons = false;
 
-//
+// keep track of when we need to clear the screen (ex: when we have the first_number and and an operator)
 let lineReset = false;
 
 // Keep track of all parsed input from input field in this object
@@ -37,56 +37,58 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
     // newer method for finding object, in this case an equals button we created
     // Uses DOM
     
-    //
+    // clear the input box (aka screen)
     document.querySelector( "#inputfield" ).value = "";
-    //
+    // reference to equals btn
     let equalsButton = document.querySelector( "#equalsbtn" );
-    //
+    // reference to zero btn
     let zeroButton = document.querySelector( "#zero" );
-    //
+    // reference to one btn
     let oneButton = document.querySelector( "#one" );
-    //
+    // reference to two btn
     let twoButton = document.querySelector( "#two" );
-    //
+    // reference to three btn
     let threeButton = document.querySelector( "#three" );
-    //
+    // reference to four btn
     let fourButton = document.querySelector( "#four" );
-    //
+    // reference to five btn
     let fiveButton = document.querySelector( "#five" );
-    //
+    // reference to six btn
     let sixButton = document.querySelector( "#six" );
-    //
+    // reference to seven btn
     let sevenButton = document.querySelector( "#seven" );
-    //
+    // reference to eight btn
     let eightButton = document.querySelector( "#eight" );
-    //
+    // reference to nine btn
     let nineButton = document.querySelector( "#nine" );
-    //
+    // reference to plus btn
     let plusButton = document.querySelector( "#plus" );
-    //
+    // reference to sub btn
     let subButton = document.querySelector( "#sub" );
-    //
+    // reference to mul btn
     let mulButton = document.querySelector( "#mult" );
-    //
+    // reference to div btn
     let divButton = document.querySelector( "#divi" );
-
+    // referecne to textbox
     let textBox = document.querySelector( "#inputfield" );
-
+    // reference to period aka float btn
     let floatButton = document.querySelector( "#float" );
-
+    // reference to flip sign btn
     let flipSignButton = document.querySelector( "#flipsign" );
-
+    // reference to clear screen btn
     let clearScreenButton = document.querySelector( "#clearScreen" );
-
+    // reference to clear history btn
     let clearHistoryButton = document.querySelector( "#clearHistory" );
 
     // check for key presses
     textBox.addEventListener( 'keydown', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
 
         else {
+            // check for a valid key which are operators and numbers
             if( !isValidInput( e.key ) ){
                 e.preventDefault();
     
@@ -94,7 +96,8 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
                     addOper( e.key );
                 }
             }
-    
+
+            // if we have a valid key...
             else {
                 // still allow addNumber() function to handle adding numbers
                 if( e.key != "Backspace" && e.key != " " ) {
@@ -111,7 +114,8 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
                         addNumber( e.key );
                     }
                 }
-    
+
+                // allow user to solve expression by pressing enter
                 else if( e.key == "Enter" && expression.hasFirst && expression.hasOper && expression.second_number != "" ) {
                     solveExpression();
                 }
@@ -119,36 +123,12 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
-    function check_float( period ) {
-        if( !expression.hasFirst && expression.first_number != "" && !expression.first_number.includes(".") ) {
-            addNumber( period );
-        }
-
-        else if( expression.hasFirst && expression.second_number != "" && !expression.second_number.includes(".") ) {
-            addNumber( period );
-        }
-
-        else if( !expression.hasFirst && ( expression.first_number == "" || expression.first_number.includes(".") ) ){
-            // invalid
-            disableButtons = true;
-            //
-            document.querySelector( "#inputfield" ).value = "Error";
-        }
-
-        else if( expression.hasFirst && ( expression.second_number == "" || expression.second_number.includes(".") ) ){
-            // invalid
-            disableButtons = true;
-            //
-            document.querySelector( "#inputfield" ).value = "Error";
-        }
-    }
-
-    //
+    // check when clear screen button is clicked
     clearScreenButton.addEventListener( 'click', (e) => {
         clearExpression();
     });
 
-    //
+    // check when clear history button is clicked
     clearHistoryButton.addEventListener( 'click', (e) => {
         if( disableButtons ) {
             e.preventDefault();
@@ -159,6 +139,7 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when flip sign button is clicked
     flipSignButton.addEventListener( 'click', (e) => {
         if( disableButtons ) {
             e.preventDefault();
@@ -169,108 +150,14 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
-    function flipSign() {
-        let inputBox = document.querySelector( "#inputfield" );
-        // check first if the current input string
-        // in the input text box has a number in it
-        if( inputBox.value.match(/[0-9]/) && !inputBox.value.includes("-")) {
-            // then flip the sign
-            let string = inputBox.value.slice( 0, 0 ) + "-" + inputBox.value.slice( 0 );
-
-            //
-            inputBox.value = string;
-            // determine whether we flipped the first or second number in the expression
-            // and update the string held by the first or second number in the expression
-            if( !expression.hasFirst && expression.first_number != "" && expression.first_number.match(/[0-9]/) ) {
-                expression.first_number = string;
-            }
-
-            else if( expression.hasFirst && expression.hasOper && expression.second_number == "" ) {
-                expression.first_number = string;
-            }
-
-            else {
-                if( expression.second_number != "" && expression.second_number.match(/[0-9]/)) {
-                    expression.second_number = string;
-                }
-            }
-        }
-
-        else if( inputBox.value.includes("-") ) {
-            let string = inputBox.value.slice( 1 );
-
-            //
-            inputBox.value = string;
-            // determine whether we flipped the first or second number in the expression
-            // and update the string held by the first or second number in the expression
-            if( !expression.hasFirst && expression.first_number != "" && expression.first_number.match(/[0-9]/) ) {
-                expression.first_number = string;
-            }
-
-            else if( expression.hasFirst && expression.hasOper && expression.second_number == "" ) {
-                expression.first_number = string;
-            }
-
-            else {
-                if( expression.second_number != "" && expression.second_number.match(/[0-9]/)) {
-                    expression.second_number = string;
-                }
-            }
-        }
-    }
-
-    //
-    function clearHistory() {
-        resultsHistory = {
-            all_results: []
-        };
-
-        resultsIdx = 0;
-
-        document.querySelector( "#historyList" ).innerHTML = "";
-    }
-
-    //
-    function clearExpression() {
-        expression = {
-            hasFirst: false,
-            //
-            hasOper: false,
-            // first number we want to perform an operation on
-            first_number: '',
-            // operator we will use for the operation
-            operator: '',
-            // second number we will use to perform an operation
-            second_number: ''
-        };
-
-        //
-        disableButtons = false;
-        //
-        document.querySelector( "#inputfield" ).value = "";
-    }
-
-    // have a function for checking if letter is a letter
-    function isValidInput( string ) {
-        if( string.match(/[0-9]/) ) {
-            return true;
-        }
-
-        else if( string == "Backspace" || string == "Enter" || string == "." ) {
-            return true;
-        }
-
-        else {
-            return false;
-        }
-    }
-
     // Create a JS Event for when we click equals button
     equalsButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
 
+        // check if we have a valid expression
         else {
             if( expression.hasFirst && expression.hasOper && expression.second_number != "" ) {
                 solveExpression();
@@ -281,8 +168,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
-    //
+    // check when zero button is clicked
     zeroButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -293,7 +181,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when one button is clicked
     oneButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -304,7 +194,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when two button is clicked
     twoButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -315,7 +207,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when three button is clicked
     threeButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -326,7 +220,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when four button is clicked
     fourButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -337,7 +233,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when five button is clicked
     fiveButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -348,7 +246,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when six button is clicked
     sixButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -359,7 +259,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when seven button is clicked
     sevenButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -370,7 +272,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when eight button is clicked
     eightButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -381,7 +285,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when nine button is clicked
     nineButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -392,8 +298,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
-    //
+    // check when plus button is clicked
     plusButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -403,7 +310,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when sub button is clicked
     subButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -413,7 +322,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when div button is clicked
     divButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -423,7 +334,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when mul button is clicked
     mulButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -433,7 +346,9 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
         }
     });
 
+    // check when the period or float button is clicked
     floatButton.addEventListener( 'click', (e) => {
+        // if we have an error disable default behavior
         if( disableButtons ) {
             e.preventDefault();
         }
@@ -444,6 +359,7 @@ document.addEventListener('DOMContentLoaded', (e) =>  {
     });
 });
 
+// add numbers to our current expression
 function addNumber( number ) {
     // if we don't have our first value in the expression
     if( !expression.hasFirst ) {
@@ -475,6 +391,7 @@ function addNumber( number ) {
     document.querySelector( "#inputfield" ).value += number;
 }
 
+// add operators to our current expression
 function addOper( oper ) {
     // we have everything to solve our expression
     if( expression.hasFirst && expression.hasOper ) {
@@ -526,6 +443,7 @@ function addOper( oper ) {
     }
 }
 
+// evaluate the expression and update history to show the result of our current expression
 function solveExpression() {
     let value1 = '';
     let value2 = '';
@@ -567,14 +485,7 @@ function solveExpression() {
     if( expression.operator == "+" ) {
         let result;
 
-        if( !Number.isInteger( value1 ) || !Number.isInteger( value2) ) {
-            // one of them are floats
-            result = ( value1 + value2 ).toPrecision( 8 );
-        }
-
-        else {
-            result = value1 + value2;
-        }
+        result = value1 + value2;
 
         document.querySelector( "#inputfield" ).value = result;
 
@@ -632,14 +543,7 @@ function solveExpression() {
     else if( expression.operator == "-" ) {
         let result;
 
-        if( !Number.isInteger( value1 ) || !Number.isInteger( value2) ) {
-            // one of them are floats
-            result = ( value1 - value2 ).toPrecision( 8 );
-        }
-
-        else {
-            result = value1 - value2;
-        }
+        result = value1 - value2;
 
         document.querySelector( "#inputfield" ).value = result;
 
@@ -697,14 +601,7 @@ function solveExpression() {
     else if( expression.operator == "*" ) {
         let result;
 
-        if( !Number.isInteger( value1 ) || !Number.isInteger( value2) ) {
-            // one of them are floats
-            result = ( value1 * value2 ).toPrecision( 8 );
-        }
-
-        else {
-            result = value1 * value2;
-        }
+        result = value1 * value2;
 
         document.querySelector( "#inputfield" ).value = result;
 
@@ -769,14 +666,9 @@ function solveExpression() {
         else {
             let result;
 
-            if( !Number.isInteger( value1 ) || !Number.isInteger( value2) ) {
-                // one of them are floats
-                result = ( value1 / value2 ).toPrecision( 8 );
-            }
-    
-            else {
-                result = value1 / value2;
-            }
+            result = ( value1 / value2 ).toPrecision( 8 );
+
+            result = value1 / value2;
 
             document.querySelector( "#inputfield" ).value = result;
     
@@ -833,4 +725,113 @@ function solveExpression() {
 
     //
     lineReset = false;
+}
+
+// this is to help create float values for our expressions and also to prevent the user from trying to type something invalid
+// like 4...03, etc. We achieve the correct behavior with these checks and use the addNumber() function to add to our current expression
+function check_float( period ) {
+    if( !expression.hasFirst && expression.first_number != "" && !expression.first_number.includes(".") ) {
+        addNumber( period );
+    }
+
+    else if( expression.hasFirst && expression.second_number != "" && !expression.second_number.includes(".") ) {
+        addNumber( period );
+    }
+}
+
+// when the user clicks the flip sign button this function is called to negate our current value in the current expression
+function flipSign() {
+    let inputBox = document.querySelector( "#inputfield" );
+    // check first if the current input string
+    // in the input text box has a number in it
+    if( inputBox.value.match(/[0-9]/) && !inputBox.value.includes("-")) {
+        // then flip the sign
+        let string = inputBox.value.slice( 0, 0 ) + "-" + inputBox.value.slice( 0 );
+
+        //
+        inputBox.value = string;
+        // determine whether we flipped the first or second number in the expression
+        // and update the string held by the first or second number in the expression
+        if( !expression.hasFirst && expression.first_number != "" && expression.first_number.match(/[0-9]/) ) {
+            expression.first_number = string;
+        }
+
+        else if( expression.hasFirst && expression.hasOper && expression.second_number == "" ) {
+            expression.first_number = string;
+        }
+
+        else {
+            if( expression.second_number != "" && expression.second_number.match(/[0-9]/)) {
+                expression.second_number = string;
+            }
+        }
+    }
+
+    else if( inputBox.value.includes("-") ) {
+        let string = inputBox.value.slice( 1 );
+
+        //
+        inputBox.value = string;
+        // determine whether we flipped the first or second number in the expression
+        // and update the string held by the first or second number in the expression
+        if( !expression.hasFirst && expression.first_number != "" && expression.first_number.match(/[0-9]/) ) {
+            expression.first_number = string;
+        }
+
+        else if( expression.hasFirst && expression.hasOper && expression.second_number == "" ) {
+            expression.first_number = string;
+        }
+
+        else {
+            if( expression.second_number != "" && expression.second_number.match(/[0-9]/)) {
+                expression.second_number = string;
+            }
+        }
+    }
+}
+
+// clear our history of previous expressions that we have typed or "clicked" into this calculator
+function clearHistory() {
+    resultsHistory = {
+        all_results: []
+    };
+
+    resultsIdx = 0;
+
+    document.querySelector( "#historyList" ).innerHTML = "";
+}
+
+// clear the current expression this includes the input box and all values that we currently held for an expression (value 1, operator, value2)
+function clearExpression() {
+    expression = {
+        hasFirst: false,
+        //
+        hasOper: false,
+        // first number we want to perform an operation on
+        first_number: '',
+        // operator we will use for the operation
+        operator: '',
+        // second number we will use to perform an operation
+        second_number: ''
+    };
+
+    //
+    disableButtons = false;
+    //
+    document.querySelector( "#inputfield" ).value = "";
+}
+
+// have a function for checking if letter is a letter
+function isValidInput( string ) {
+    if( string.match(/[0-9]/) ) {
+        return true;
+    }
+
+    else if( string == "Backspace" || string == "Enter" || string == "." ) {
+        return true;
+    }
+
+    else {
+        return false;
+    }
 }

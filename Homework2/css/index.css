@@ -50,15 +50,14 @@ button:hover {
     color: white;
 }
 
-/** Container for all elements on screen */
+/** Container for all elements on screen, use grid layout */
 .wrapper {
     display: grid;
-    /** */
     grid-template-rows: 1fr;
-    /** */
     grid-template-columns: 1fr 1fr;
 }
 
+/** Use flexbox to organize our buttons for calculator besides clear history, position them at flex-start */
 .flexContainer {
     display: flex;
     justify-content: flex-start;
@@ -66,29 +65,35 @@ button:hover {
     gap: 20px;
 }
 
+/** Space out elements in our flex container divs that hold various buttons (such as zero button and plus button for example )*/
 div.flexContainer {
     margin-top: 10px;
     margin-left: 475px;
 }
 
+/** Construct a contained to hold our clear history button and history list with one column and two rows */
 .historyContainer {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
 }
 
+/** Put input text box and all other buttons in column 1 of main grid */
 #calculatorFunctions {
     grid-column: 1;
 }
 
+/** Position our calculator history which includes clear history button and list in column 2 of our main grid */
 .calculatorHistory {
     grid-column: 2;
 }
 
+/** Increase right margin to position our calculator history section of the grid */
 div.calculatorHistory {
     margin-right: 475px;
 }
 
+/** Create a grid to organize our clear history button and our history list for the results of previous computations */
 .display {
     display: grid;
     grid-template-columns: 1fr;
@@ -97,14 +102,17 @@ div.calculatorHistory {
     row-gap: 5px;
 }
 
+/** Put the list that holds previous computations results in the first row of the grid */
 .list {
     grid-row: 1;
 }
 
+/** Put clear history button in row 2 of the current grid */
 .btn1 {
     grid-row: 2;
 }
 
+/** Style our unordered list */
 ul {
     height: 200px;
     width: 275px;
@@ -116,6 +124,7 @@ ul {
     font-family: 'Pixelify Sans', cursive;
 }
 
+/** Style our list elements so they look nice and also use a pointer to indicate to the user they can click on results of previous computations */
 ul li {
     padding-left: 20px;
     padding-top: 20px;
@@ -126,10 +135,12 @@ ul li {
     cursor: pointer;
 }
 
+/** Change text color to indicate we are hovering over a list item */
 ul li:hover {
     color: rgb(172, 172, 172);
 }
 
+/** Do not show the the bottom border on the last element in the list */
 ul li:last-child {
     border-bottom: none;
 }
@@ -144,12 +155,14 @@ ul li:last-child {
     border-radius: 15%;
 }
 
+/** Style header for basic calculator*/
 h1 {
     text-align: center;
     font-family: 'Pixelify Sans', cursive;
     font-style: italic;
 }
 
+/** Round our equals button and make it larger */
 #equalsbtn {
     width: 190px;
     height: 35px;
