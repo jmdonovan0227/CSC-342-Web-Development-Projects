@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/index.css"/>
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <h1>Basic Calculator</h1>
+    <div class="wrapper">
+        <div id="calculatorFunctions">
+            <div class="flexContainer">
+                <input id="inputfield" type="text" pattern="[0-9]" required/>
+            </div>
+
+            <div class="flexContainer">
+                <button id="seven">7</button>
+                <button id="eight">8</button>
+                <button id="nine">9</button>
+                <button id="divi">/</button>
+            </div>
+
+            <div class="flexContainer">
+                <button id="four">4</button>
+                <button id="five">5</button>
+                <button id="six">6</button>
+                <button id="mult">*</button>
+            </div>
+
+            <div class="flexContainer">
+                <button id="one">1</button>
+                <button id="two">2</button>
+                <button id="three">3</button>
+                <button id="sub">-</button>
+            </div>
+
+            <div class="flexContainer">
+                <button id="zero">0</button>
+                <button id="float">.</button>
+                <button id="flipsign">+/-</button>
+                <button id="plus">+</button>
+            </div>
+
+            <div class="flexContainer">
+                <button id="equalsbtn">=</button>
+                <button id="clearScreen">C</button>
+            </div>
+        </div>
+        
+        <div class="calculatorHistory">
+                <div class="display">
+                    <div class="list">
+                        <ul id="historyList"></ul>
+                    </div>
+
+                    <div class="btn1">
+                        <button id="clearHistory">Clear History</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+
+</html>
