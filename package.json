@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "name": "csc342-2023fall-jmpatte8",
+  "description": "- **Homework Assignments**\r   - _Homework 0_\r     - [README.md](Homework0/README.md)\r   **Team Project**\r   - Sports Place [Repo Link](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupT)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

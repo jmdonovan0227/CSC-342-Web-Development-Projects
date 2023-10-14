@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/Homework3/static/css/form.css" />
+<script src="/Homework3/static/js/preview.js"></script>
+</head>
+
+<body>
+    <div class="senderDetails">
+        <div class="browse">
+            <h1>Sender Details</h1>
+            <img class="previewImage" id="preview" alt="Preview Image">
+            <form class="test">
+                <input id="fileText" type="text"/>
+                <input type="file" accept="image/*" onchange="previewImage(event)"/>
+            </form>
+            <div class="senderNames">
+                <label>First Name:</label>
+                <label id="slast">Last Name:</label>
+            </div>
+            <div class="senderInputBoxes">
+                <input type="text"/>
+                <input type="text"/>
+            </div>
+        </div>
+
+        <div class="recipient">
+            <h1>Recipient Details</h1>
+            <div class="recipientNames">
+                <label>First Name:</label>
+                <label id="rlast">Last Name:</label>
+            </div>
+            <div class="recipientNamesBoxes">
+                <input type="text"/>
+                <input type="text"/>
+            </div>
+
+            <div>
+                <label>Message</label>
+            </div>
+            <div>
+                <textarea id="messageBox"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
