@@ -18,3 +18,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./Homework2:/usr/local/apache2/htdocs
+  hw3:
+    build: ./Homework3
+    restart: unless-stopped
+    volumes:
+    - ./Homework3/src:/app/src
+    - ./Homework3/server.js:/app/server.js

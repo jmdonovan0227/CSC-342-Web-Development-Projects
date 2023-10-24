@@ -6,21 +6,27 @@
 </head>
 
 <body>
+    <form action="/formdata" method="post">
     <div class="senderDetails">
         <div class="browse">
             <h1>Sender Details</h1>
-            <img class="previewImage" id="preview" alt="Preview Image">
-            <form class="test">
-                <input id="fileText" type="text"/>
-                <input type="file" accept="image/*" onchange="previewImage(event)"/>
-            </form>
+            <img class="previewImage" id="preview" alt="Preview Image" required>
+            <div class="selectFileBox">
+                <input id="fileText" type="text" required/>
+                <label id="browseLabel" for="fileSelect" required>
+                Browse
+                <input id="fileSelect" type="file" accept=".png, .jpeg, .jpg" onchange="previewImage(event)"/>
+                </label>
+            </div>
+            <div id="err1"></div>
+
             <div class="senderNames">
                 <label>First Name:</label>
                 <label id="slast">Last Name:</label>
             </div>
             <div class="senderInputBoxes">
-                <input type="text"/>
-                <input type="text"/>
+                <input id="sFirstBox" type="text"/>
+                <input id="sLastBox" type="text"/>
             </div>
         </div>
 
@@ -31,18 +37,90 @@
                 <label id="rlast">Last Name:</label>
             </div>
             <div class="recipientNamesBoxes">
-                <input type="text"/>
-                <input type="text"/>
+                <input id="rFirstBox" type="text" pattern="[a-zA-Z]" required/>
+                <input id="rLastBox" type="text" pattern="[a-zA-Z]" required/>
             </div>
 
-            <div>
+            <div id="err2"></div>
+            <div id="err3"></div>
+
+            <div class="messageTxt">
                 <label>Message</label>
             </div>
             <div>
                 <textarea id="messageBox"></textarea>
+                <div id="err4"></div>
             </div>
+            <div id="notifyRecipient">
+                <label>Notify Recipient</label>
+            </div>
+
+            <div class="notifyButtons">
+                <input id="emailRadio" type="radio"/>
+                <label>Email</label>
+                <input id="smsRadio" type="radio"/>
+                <label>SMS</label>
+                <input id="dnotRadio" type="radio"/>
+                <label>Do not notify</label>
+                <div id="err4"></div>
+            </div>
+
+            <div class="recipientNames">
+                <label>Email:</label>
+                <label id="pnumb">Phone Number:</label>
+            </div>
+
+            <div class="recipientNamesBoxes">
+                <input id="emailBox" type="email"/>
+                <input id="pnumbBox" type="text"/>
+            </div>
+
+            <div id="err5"></div>
+            <div id="err6"></div>
         </div>
     </div>
+    <div class="paymentDetails">
+        <div class="payment">
+        <h1>Payment Details</h1>
+
+        <div class="cardsText">
+            <label>Card Type:</label>
+            <label id="cnumb">Card Number:</label>
+        </div>
+
+        <div class="cardsBoxes">
+                <select class="styleDropdownAndButtons">
+                    <option id="visa">Visa</option>
+                    <option is="master">Mastercard</option>
+                    <option id="discover">Discover</option>
+                    <option id="american">American Express</option>
+                </select>
+                <input id="cardNumberBox" type="text">
+        </div>
+
+        <div class="paymentInfoText">
+            <label id="expText">Expiration:</label>
+            <label id="ccvText">CCV:</label>
+            <label id="amountText">Amount ($):</label>
+        </div>
+
+        <div class="paymentInfoBoxes">
+            <input id="date" class="" type="date">
+            <input id="ccv" type="password">
+            <input id="amount" type="text">
+        </div>
+
+        <div class="termsCheckbox">
+            <input id="termsBox" type="checkbox"/>
+            <label id="termsText">I agree to the Terms and Conditions</label>
+        </div>
+
+        <div class="sendbtn">
+            <input id="sendbtnstyle" type="submit"></button>
+        </div>
+        </div>
+    </div>
+    </form>
 </body>
 
 </html>
