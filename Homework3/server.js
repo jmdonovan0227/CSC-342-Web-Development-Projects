@@ -21,3 +21,5 @@ app.get('/', (req, res) => {
 app.post('/formdata', upload.single('myfile'), (req, res) => {
     console.log( "Working!" );
 });
+
+app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
