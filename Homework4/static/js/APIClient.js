@@ -5,16 +5,15 @@ const API_BASE = '/api';
 // Make sure we have an API call for each endpoint in API Routes
 export default {
     // login user
-    logIn: (username, password) => {
+    logIn: (username) => {
         let data = {
             username: username,
-            password: password
         }
 
         return HTTPClient.post(API_BASE + '/users/login', data );
     },
 
-    // get the current user that has a session
+    // get current user
     getCurrentUser: () => {
         return HTTPClient.get(API_BASE + '/users/current');
     },

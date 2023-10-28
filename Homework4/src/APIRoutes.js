@@ -1,5 +1,7 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const apiRouter = express.Router();
+apiRouter.use(cookieParser());
 apiRouter.use(express.json());
 
 const { SessionMiddleware, initializeSession, removeSession } = require('./SessionCookieMiddleware');
@@ -9,7 +11,7 @@ const followsDAO = require('./followsDAO');
 
 
 // Get all users and information about what other users they are following
-apiRouter.get('/follows', (req, res) => {
+apiRouter.get('/follows', SessionMiddleware, (req, res) => {
     followsDAO.getFollowers().then(followers => {
         res.json(followers);
     }).catch(err => {
@@ -18,7 +20,7 @@ apiRouter.get('/follows', (req, res) => {
 });
 
 // Get all howls made by users (or posted messages)
-apiRouter.get('/howls', (req, res) => {
+apiRouter.get('/howls', SessionMiddleware, (req, res) => {
     howlsDAO.getHowls().then(howls => {
         res.json(howls);
     }).catch(err => {
@@ -27,7 +29,7 @@ apiRouter.get('/howls', (req, res) => {
 });
 
 // Get all users in the system
-apiRouter.get('/users', (req, res) => {
+apiRouter.get('/users', SessionMiddleware, (req, res) => {
     usersDAO.getUsers().then(users => {
         res.json(users);
     }).catch(err => {
@@ -42,13 +44,13 @@ apiRouter.get('/users', (req, res) => {
 apiRouter.post('/users/login', (req, res) => {
     // is username and password valid?
     // check if api route returns a user
-    if( req.body.username && req.body.password ) {
+    if( req.body.username ) {
         // Use UserDAO getUserByCredentials to get user object
-        usersDAO.getUserByCredentials(req.body.username, req.body.password).then(user => {
+        usersDAO.getUserByCredentials(req.body.username).then(user => {
             let result = {
-                user: user
+                user: user,
             }
-
+            
             initializeSession(req, res, user);
 
             res.json(result);
@@ -59,6 +61,7 @@ apiRouter.post('/users/login', (req, res) => {
     }
 
     else {
+        console.log("Invalid username");
         //
         res.status(401).json({error: 'Not authenticated'});
     }
@@ -74,6 +77,7 @@ apiRouter.get('/users/:userId', SessionMiddleware, (req, res) => {
 });
 
 apiRouter.get('/users/current', SessionMiddleware, (req, res) => {
+    console.log(req.session);
     res.json(req.session.user);
 });
 

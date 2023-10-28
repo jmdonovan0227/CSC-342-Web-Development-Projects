@@ -1,7 +1,7 @@
 let users = require('./data/users.json');
 
 module.exports = {
-    getUserByCredentials: (username, password) => {
+    getUserByCredentials: (username) => {
         return new Promise((resolve, reject) => {
         const user = users.find(user => user.username == username);
         if (user) { // we found our user

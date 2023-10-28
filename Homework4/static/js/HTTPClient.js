@@ -1,8 +1,7 @@
 const handleError = (res) => {
     if(!res.ok) {
       if(res.status == 401) {
-        localStorage.removeItem('user');
-        document.location = '/login';
+        document.location = '/';
         throw new Error("Unauthenticated");
       }
       else {

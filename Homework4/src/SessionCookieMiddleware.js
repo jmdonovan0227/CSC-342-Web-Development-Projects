@@ -26,20 +26,22 @@ exports.SessionMiddleware = (req, res, next) => {
 
 
 exports.initializeSession = (req, res, user) => {
+  // generate id
   let sessionId = generateSessionId();
+  // generate session data
   let sessionData = {
-    user: user,
+    user: user
   }
 
   //send session ID in cookie to client
   res.cookie(SESSION_COOKIE_NAME, sessionId, {
     httpOnly: true,
     secure: true,
-    maxAge: 2 * 60 * 1000 //This session expires in 2 minutes
+    // maxAge: 2 * 60 * 1000 //This session expires in 2 minutes
   });
 
   sessions[sessionId] = sessionData; //Associate ID with data
-};
+}
 
 
 exports.removeSession = (req, res) => {
