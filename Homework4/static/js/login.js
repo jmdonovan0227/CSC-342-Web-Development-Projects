@@ -7,6 +7,7 @@ console.log(testButton);
 
 loginButton.addEventListener('click', (e) => {
     api.logIn(username.value).then(userData => {
+        localStorage.setItem("user", JSON.stringify(userData.user));
         document.location = "/main";
     });
 });

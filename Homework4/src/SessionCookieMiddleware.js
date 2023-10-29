@@ -30,18 +30,19 @@ exports.initializeSession = (req, res, user) => {
   let sessionId = generateSessionId();
   // generate session data
   let sessionData = {
-    user: user
+    user: user,
+    howls: []
   }
 
   //send session ID in cookie to client
   res.cookie(SESSION_COOKIE_NAME, sessionId, {
     httpOnly: true,
     secure: true,
-    // maxAge: 2 * 60 * 1000 //This session expires in 2 minutes
+    maxAge: 2 * 60 * 1000 //This session expires in 2 minutes
   });
 
   sessions[sessionId] = sessionData; //Associate ID with data
-}
+};
 
 
 exports.removeSession = (req, res) => {
@@ -57,8 +58,6 @@ exports.removeSession = (req, res) => {
   });
 
 }
-
-
 
 function generateSessionId() {
   return crypto.randomBytes(256).toString ("hex");

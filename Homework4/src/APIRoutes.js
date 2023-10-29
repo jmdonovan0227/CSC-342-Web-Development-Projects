@@ -22,6 +22,8 @@ apiRouter.get('/follows', SessionMiddleware, (req, res) => {
 // Get all howls made by users (or posted messages)
 apiRouter.get('/howls', SessionMiddleware, (req, res) => {
     howlsDAO.getHowls().then(howls => {
+        // let sortedHowls = howls.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+        // sortedHowls = sortedHowls.reverse();
         res.json(howls);
     }).catch(err => {
         res.status(500).json({error: 'Internal Server Error'})
@@ -48,7 +50,7 @@ apiRouter.post('/users/login', (req, res) => {
         // Use UserDAO getUserByCredentials to get user object
         usersDAO.getUserByCredentials(req.body.username).then(user => {
             let result = {
-                user: user,
+                user: user
             }
             
             initializeSession(req, res, user);
@@ -67,6 +69,11 @@ apiRouter.post('/users/login', (req, res) => {
     }
 });
 
+apiRouter.get('/users/current', SessionMiddleware, (req, res) => {
+    console.log(req.session);
+    res.json(req.session.user);
+});
+
 apiRouter.get('/users/:userId', SessionMiddleware, (req, res) => {
     const userId = req.params.userId;
     usersDAO.getUserByID(userId).then(user => {
@@ -74,11 +81,6 @@ apiRouter.get('/users/:userId', SessionMiddleware, (req, res) => {
     }).catch(err => {
         res.status(404).json({error: 'User not found'})
     });
-});
-
-apiRouter.get('/users/current', SessionMiddleware, (req, res) => {
-    console.log(req.session);
-    res.json(req.session.user);
 });
 
 
@@ -96,7 +98,7 @@ apiRouter.get('/follows/:userId', SessionMiddleware, (req, res) => {
 });
 
 // add a follower
-apiRouter.post('/follows', SessionMiddleware, (req, res) => {
+apiRouter.put('/follows', SessionMiddleware, (req, res) => {
     if( req.body.userId && req.body.followerId ) {
         // get the user with followers
         followsDAO.getUsersFollowedByID(userId).then(user => {
@@ -156,11 +158,44 @@ apiRouter.get('/howls/:userId', SessionMiddleware, (req, res) => {
     let userId = req.params.userId;
 
     howlsDAO.getHowlsByUserID(userId).then(userHowls => {
-        console.log(userHowls);
+        // let sortedHowls = userHowls.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+        // sortedHowls = sortedHowls.reverse();
         res.json(userHowls);
     }).catch(err => {
         res.status(404).json({error: 'User with id not found'})
     });
 });
+
+// get all howls before user with id and howls posted by user with id after
+apiRouter.get('/howls/before/:userId', SessionMiddleware, (req, res) => {
+    // get user id
+    let userId = req.params.userId;
+    // first get all howls before the user with id
+    howlsDAO.getAllOtherHowlsByID(userId).then(allOtherHowls => {
+        // // sort the allOtherHowls by date
+        // let sortedOtherHowls = allOtherHowls.sort((a, b) => new Date(a.datetime) - new Date(b.datetime) );
+        // // reverse array as it will start with oldest date
+        // sortedOtherHowls = sortedOtherHowls.reverse();
+
+        // now get all howls by the user with id
+        howlsDAO.getHowlsByUserID(userId).then(howls => {
+            // let sortedHowls = howls.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+            // sortedHowls = sortedHowls.reverse();
+            // // concat sortedHowls to the end of sortedOtherHowls
+            // let ret = sortedOtherHowls.concat(sortedHowls);
+            let sortedHowls = allOtherHowls.concat(howls);
+            sortedHowls = howls.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+            sortedHowls = sortedHowls.reverse();
+
+            res.json(sortedHowls);
+        }).catch(err => {
+            console.log("User with id does not exist");
+        });
+    }).catch(err => {
+        console.log("User with id does not exist");
+    });
+});
+
+
 
 module.exports = apiRouter;

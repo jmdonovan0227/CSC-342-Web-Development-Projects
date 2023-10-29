@@ -23,5 +23,13 @@ module.exports = {
             const userHowls = howls.filter(howl => howl.userId == id );
             resolve(userHowls);
         })
+    },
+
+    // get all howls except for the user with id
+    getAllOtherHowlsByID: (id) => {
+        return new Promise((resolve, reject) => {
+            const allOtherHowls = howls.filter(howl => howl.userId != id );
+            resolve(allOtherHowls);
+        });
     }
 }
