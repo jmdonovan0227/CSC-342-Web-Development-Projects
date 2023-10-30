@@ -1,6 +1,7 @@
 const handleError = (res) => {
     if(!res.ok) {
       if(res.status == 401) {
+        console.log("Response was good!");
         document.location = '/';
         throw new Error("Unauthenticated");
       }

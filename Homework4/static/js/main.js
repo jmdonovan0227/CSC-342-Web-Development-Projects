@@ -34,9 +34,9 @@ function update_list(id) {
                 // combine the followed howls and user howls and sort
                 let sortedHowls = followedHowls.concat(userHowls);
                 //
-                sortedHowls.sort((a, b) => new Date(a.datetime) - new Date(b.datetime) );
+                sortedHowls.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
                 //
-                sortedHowls = sortedHowls.reverse();
+                sortedHowls.reverse();
                 //
                 console.log(sortedHowls);
 
@@ -54,9 +54,20 @@ function update_list(id) {
 }
 
 function createMessages(sortedHowls) {
-    sortedHowls.forEach(howl => {
+    // clear current content
+    document.querySelector("#messages").innerHTML = "";
+    let idx = 0;
+    for(let i = 0; i < sortedHowls.length; i++ ) {
+        let id = sortedHowls[i].userId;
         // get the user by id
-        api.getUserByID(howl.userId).then(user => {
+        api.getUserByID(id).then(user => {
+            console.log(idx);
+            let howl = sortedHowls[idx];
+            let div_one = document.createElement('div');
+            div_one.classList.add('userInfo');
+            let main_div = document.createElement('div');
+            main_div.classList.add('mainDiv');
+        
             let profile_picture = document.createElement('img');
             profile_picture.src = user.avatar;
 
@@ -72,35 +83,30 @@ function createMessages(sortedHowls) {
             let date = document.createElement('span');
             let convert = new Date(howl.datetime);
             date.innerHTML = convert.toLocaleDateString() + ", " + convert.toLocaleTimeString();
+            // create the text paragraph
+            let text = document.createElement('p');
+            text.innerHTML = howl.text;
 
-            // create div to hold header of message info
-            let div_one = document.createElement('div');
-            div_one.classList.add('userInfo');
+            //create div to hold header of message info
             div_one.appendChild(profile_picture);
             div_one.appendChild(full_name);
             div_one.appendChild(profile_link);
             div_one.appendChild(date);
-
-            // create the text paragraph
-            let text = document.createElement('p');
-            text.innerHTML = howl.text;
 
             // create a second div to hold this info
             let div_two = document.createElement('div');
             div_two.classList.add('paragraphs');
             div_two.appendChild(text);
 
-            // create main div and append div_one and div_two
-            let main_div = document.createElement('div');
-            main_div.classList.add('mainDiv');
+            // append everything
             main_div.appendChild(div_one);
             main_div.appendChild(div_two);
-
             document.getElementById("messages").append(main_div);
+            idx++;
         }).catch(err => {
             console.log("Can't find user with id");
         });
-    });
+    }
 }
 
 let button = document.querySelector("#howlButton");

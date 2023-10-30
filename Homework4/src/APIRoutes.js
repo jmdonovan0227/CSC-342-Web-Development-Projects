@@ -74,7 +74,7 @@ apiRouter.get('/users/current', SessionMiddleware, (req, res) => {
     res.json(req.session.user);
 });
 
-apiRouter.get('/users/:userId', SessionMiddleware, (req, res) => {
+apiRouter.get('/users/find/:userId', SessionMiddleware, (req, res) => {
     const userId = req.params.userId;
     usersDAO.getUserByID(userId).then(user => {
         res.json(user);
@@ -97,16 +97,17 @@ apiRouter.get('/follows/:userId', SessionMiddleware, (req, res) => {
     });
 });
 
-// add a follower
-apiRouter.put('/follows', SessionMiddleware, (req, res) => {
+
+// delete a follower
+apiRouter.put('/follows/delete', SessionMiddleware, (req, res) => {
     if( req.body.userId && req.body.followerId ) {
         // get the user with followers
-        followsDAO.getUsersFollowedByID(userId).then(user => {
-            followsDAO.addFollower(userId, followerId).then(result => {
+        followsDAO.getUsersFollowedByID(req.body.userId).then(user => {
+            followsDAO.deleteFollower(req.body.userId, req.body.followerId).then(result => {
                 console.log(result);
                 res.json(result);
             }).catch(err => {
-                res.status(409).json({error: 'User is already following this person'})
+                res.status(409).json({error: 'User is not following this person'})
             });
         }).catch(err => {
             res.status(404).json({error: 'User with id was not found in followers'})
@@ -114,20 +115,20 @@ apiRouter.put('/follows', SessionMiddleware, (req, res) => {
     }
 
     else {
-        res.status(500).json({error: 'Internal server error'});
+        res.status(500).json({error: 'We are getting a server error oh no!' + req.body });
     }
 });
 
-// delete a follower
-apiRouter.delete('/follows', SessionMiddleware, (req, res) => {
+// add a follower
+apiRouter.put('/follows', SessionMiddleware, (req, res) => {
     if( req.body.userId && req.body.followerId ) {
         // get the user with followers
-        followsDAO.getUsersFollowedByID(userId).then(user => {
-            followsDAO.deleteFollower(userId, followerId).then(result => {
+        followsDAO.getUsersFollowedByID(req.body.userId).then(user => {
+            followsDAO.addFollower(req.body.userId, req.body.followerId).then(result => {
                 console.log(result);
                 res.json(result);
             }).catch(err => {
-                res.status(409).json({error: 'User is not following this person'})
+                res.status(409).json({error: 'User is already following this person'})
             });
         }).catch(err => {
             res.status(404).json({error: 'User with id was not found in followers'})

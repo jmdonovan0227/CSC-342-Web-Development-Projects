@@ -35,7 +35,7 @@ export default {
 
     // get a user by id
     getUserByID: (id) => {
-        return HTTPClient.get(API_BASE + `/users/${id}`);
+        return HTTPClient.get(API_BASE + `/users/find/${id}`);
     },
 
     // get the array of people that user with id follows
@@ -45,21 +45,26 @@ export default {
 
     //
     followUser: (userId, followerId) => {
-        result = {
+        let result = {
             userId: userId,
             followerId: followerId
         }
 
-        return HTTPClient.post(API_BASE + '/follows', result);
+        console.log("The result is...");
+        console.log(result);
+
+        return HTTPClient.put(API_BASE + '/follows', result);
     },
 
     //
     unfollowUser: (userId, followerId) => {
-        result = {
+        let result = {
             userId: userId,
             followerId: followerId
         }
+
+        console.log(result);
         
-        return HTTPClient.delete(API_BASE + '/follows', result);
+        return HTTPClient.put(API_BASE + '/follows/delete', result);
     }
 };

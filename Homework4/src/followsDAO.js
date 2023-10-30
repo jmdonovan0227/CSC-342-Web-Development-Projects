@@ -13,7 +13,7 @@ module.exports = {
     getUsersFollowedByID: (id) => {
         return new Promise((resolve, reject) => {
             // this might not work
-            const usersFollowing = follows[`${id}`];
+            const usersFollowing = follows[id];
             console.log(usersFollowing);
             resolve(usersFollowing);
         });
@@ -22,11 +22,11 @@ module.exports = {
     // add follower
     addFollower: (userId, followerId) => {
         return new Promise((resolve, reject) => {
-            const userWithFollowers = follows[`${id}`];
+            let userWithFollowers = follows[`${userId}`];
             console.log(userWithFollowers);
 
             // check if follower with id (followerId) exists
-            let follower = userWithFollowers.following.find(fId => fId == followerId);
+            let follower = userWithFollowers.following.includes(followerId);
 
             console.log(follower);
 
@@ -36,7 +36,7 @@ module.exports = {
 
             else {
                 userWithFollowers.following.push(followerId);
-                resolve(followerId);
+                resolve(userWithFollowers);
                 console.log(userWithFollowers);
             }
         });
@@ -45,21 +45,21 @@ module.exports = {
     // delete follower
     deleteFollower: (userId, followerId) => {
         return new Promise((resolve, reject) => {
-            const userWithFollowers = follows[`${id}`];
+            let userWithFollowers = follows[`${userId}`];
             console.log(userWithFollowers);
 
             // check if follower with id (followerId) exists
-            let follower = userWithFollowers.following.find(fId => fId == followerId);
+            let follower = userWithFollowers.following.includes(followerId);
 
             console.log(follower);
 
             if(follower) {
-                userWithFollowers.following.splice(following.indexOf(follower), 1 );
-                console.log(userWithFollowers);
+                userWithFollowers.following.splice(userWithFollowers.following.indexOf(followerId), 1 );
+                resolve(userWithFollowers);
             }
 
             else {
-                console.log("User is not following the passed follower");
+                reject("Can't delete")
             }
         });
     }
