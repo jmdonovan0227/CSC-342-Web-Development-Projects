@@ -8,4 +8,4 @@ RUN npm install
 
 ENV PORT 80
 
-CMD [ "npm", "start" ]
+ENTRYPOINT [ "npm", "start" ]
