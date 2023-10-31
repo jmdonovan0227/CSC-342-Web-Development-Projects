@@ -31,7 +31,6 @@ exports.initializeSession = (req, res, user) => {
   // generate session data
   let sessionData = {
     user: user,
-    howls: []
   }
 
   //send session ID in cookie to client
