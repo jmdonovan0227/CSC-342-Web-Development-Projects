@@ -22,8 +22,8 @@ services:
     build: ./Homework3
     restart: unless-stopped
     volumes:
-    - ./Homework3/src:/app/src
-    - ./Homework3/server.js:/app/server.js
+    - ./Homework3/static:/app/static
+    - ./Homework3/templates:/app/templates
 
   hw4:
     build: ./Homework4

@@ -2,7 +2,7 @@ FROM node:lts
 
 WORKDIR /app
 
-COPY ./ ./
+COPY . .
 
 RUN npm install
 

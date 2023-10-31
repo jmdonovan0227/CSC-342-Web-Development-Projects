@@ -3,16 +3,17 @@
 <head>
 <link rel="stylesheet" href="/css/form.css" />
 <script src="/js/preview.js"></script>
+<script src="/js/validate.js"></script>
 </head>
 
 <body>
-    <form action="/formdata" method="post">
+    <form action="formdata" enctype="multipart/form-data" method="post">
     <div class="senderDetails">
         <div class="browse">
             <h1>Sender Details</h1>
             <img class="previewImage" id="preview" alt="Preview Image" required>
             <div class="selectFileBox">
-                <input id="fileText" type="text" required/>
+                <input placeholder="picture.png" id="fileText" type="text" name="file" required/>
                 <label id="browseLabel" for="fileSelect" required>
                 Browse
                 <input id="fileSelect" type="file" accept=".png, .jpeg, .jpg" onchange="previewImage(event)"/>
@@ -25,8 +26,8 @@
                 <label id="slast">Last Name:</label>
             </div>
             <div class="senderInputBoxes">
-                <input id="sFirstBox" type="text"/>
-                <input id="sLastBox" type="text"/>
+                    <input placeholder="John" id="sFirstBox" name="sender_first" type="text"/>
+                    <input placeholder="Smith" id="sLastBox" name="sender_last" type="text"/>
             </div>
         </div>
 
@@ -37,8 +38,8 @@
                 <label id="rlast">Last Name:</label>
             </div>
             <div class="recipientNamesBoxes">
-                <input id="rFirstBox" type="text" pattern="[a-zA-Z]" required/>
-                <input id="rLastBox" type="text" pattern="[a-zA-Z]" required/>
+                <input placeholder="John" id="rFirstBox" name="recipient_first" type="text"/>
+                <input placeholder="Smith" id="rLastBox" name="recipient_last" type="text"/>
             </div>
 
             <div id="err2"></div>
@@ -48,7 +49,7 @@
                 <label>Message</label>
             </div>
             <div>
-                <textarea id="messageBox"></textarea>
+                <textarea placeholder="A message" name="message" id="messageBox"></textarea>
                 <div id="err4"></div>
             </div>
             <div id="notifyRecipient">
@@ -56,11 +57,11 @@
             </div>
 
             <div class="notifyButtons">
-                <input id="emailRadio" type="radio"/>
+                <input id="emailRadio" name="email_button" type="radio"/>
                 <label>Email</label>
-                <input id="smsRadio" type="radio"/>
+                <input id="smsRadio" name="sms_button" type="radio"/>
                 <label>SMS</label>
-                <input id="dnotRadio" type="radio"/>
+                <input id="dnotRadio" name="dno_button" type="radio"/>
                 <label>Do not notify</label>
                 <div id="err4"></div>
             </div>
@@ -71,8 +72,8 @@
             </div>
 
             <div class="recipientNamesBoxes">
-                <input id="emailBox" type="email"/>
-                <input id="pnumbBox" type="text"/>
+                <input id="emailBox" name="email" type="email" placeholder="jsmith@gmail.com"/>
+                <input id="pnumbBox" name="pnumber" type="text" placeholder="555-555-5555"/>
             </div>
 
             <div id="err5"></div>
@@ -95,7 +96,7 @@
                     <option id="discover">Discover</option>
                     <option id="american">American Express</option>
                 </select>
-                <input id="cardNumberBox" type="text">
+                <input placeholder="XXXX-XXXX-XXXX-XXXX"name="cnumber" id="cardNumberBox" type="text">
         </div>
 
         <div class="paymentInfoText">
@@ -105,13 +106,13 @@
         </div>
 
         <div class="paymentInfoBoxes">
-            <input id="date" class="" type="date">
-            <input id="ccv" type="password">
-            <input id="amount" type="text">
+            <input id="date" name="date" class="" type="date">
+            <input id="ccv" name="ccv" type="password" placeholder="xxx">
+            <input id="amount" name="amount" type="text" placeholder="5.00">
         </div>
 
         <div class="termsCheckbox">
-            <input id="termsBox" type="checkbox"/>
+            <input id="termsBox" name="terms_box" type="checkbox"/>
             <label id="termsText">I agree to the Terms and Conditions</label>
         </div>
 
