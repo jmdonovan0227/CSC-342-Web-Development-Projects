@@ -32,3 +32,11 @@ services:
     - ./Homework4/static:/app/static
     - ./Homework4/templates:/app/templates
     - ./Homework4/src:/app/src
+  
+  hw5:
+    build: ./Homework5
+    restart: unless-stopped
+    volumes:
+    - ./Homework5/static:/app/static
+    - ./Homework5/templates:/app/templates
+    - ./Homework5/src:/app/src

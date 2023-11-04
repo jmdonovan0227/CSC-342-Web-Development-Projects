@@ -1,0 +1,62 @@
+#test {
+    margin-left: 350px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+img {
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    align-self: center;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.userNameText {
+    margin-top: 5px;
+    align-self: center;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.dropdown {
+    position: absolute;
+    border: 2px solid black;
+    align-self: center;
+}
+
+#mainDiv {
+    background-color: rgb(216, 215, 215);
+}
+
+.button_div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 5px;
+}
+
+.button_div button {
+    border: 1px solid gray;
+    border-radius: 10%;
+}
+
+.button_div button:hover {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+}
+
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome h1 {
+    font-style: italic;
+    margin-right: 35px;
+}
