@@ -13,10 +13,10 @@ export default {
       password: password
     }
 
-    return HTTPClient.post(API_BASE+'/login', data);
+    return HTTPClient.post(API_BASE+'/users/login', data);
   },
 
   logOut: () => {
-    return HTTPClient.post(API_BASE+'/logout', {});
+    return HTTPClient.post(API_BASE+'/users/logout', {});
   }
 };

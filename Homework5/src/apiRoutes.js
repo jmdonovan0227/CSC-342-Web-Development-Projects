@@ -10,7 +10,7 @@ const {TokenMiddleware, generateToken, removeToken} = require('./TokenMiddleware
 
 const UserDAO = require('./UserDAO');
 
-apiRouter.post('/login', (req, res) => {
+apiRouter.post('/users/login', (req, res) => {
     if(req.body.username && req.body.password) {
         UserDAO.getUserByCredentials(req.body.username, req.body.password).then(user => {
             let result = {
@@ -33,7 +33,7 @@ apiRouter.post('/login', (req, res) => {
     }
 });
 
-apiRouter.post('/logout', (req, res) => {
+apiRouter.post('/users/logout', (req, res) => {
     removeToken(req, res);
     res.json({success: true});
 });
