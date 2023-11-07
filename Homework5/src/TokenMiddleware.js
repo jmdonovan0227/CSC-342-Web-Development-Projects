@@ -59,9 +59,11 @@ exports.TokenMiddleware = (req, res, next) => {
       
       // check hours first if our current hour is greater than the exp date we know it is expired
       if(current_date.getHours() > exp_date.getHours() && exp_date.getHours() != 0) {
-        console.log("Failing in hours");
-        res.status(401).json({error: 'Not authenticated'});
-        return;
+        if(current_date.getHours() != 23 && exp_date.getHours() != 0) {
+          // catch boundary values
+          res.status(401).json({error: 'Not authenticated'});
+          return;
+        }
       }
 
 
