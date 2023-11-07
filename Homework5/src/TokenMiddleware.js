@@ -46,15 +46,20 @@ exports.TokenMiddleware = (req, res, next) => {
     let signature_verify = hmac.update(header_encoded + "." + payload_encoded).digest('base64url');
 
     if(signature_verify == signature) {
+      console.log("Signature Verified!");
       // we have passed step one our current signature matches the signature calculated
       // using the header and payload, now check that the passed payload is not expired
       let exp_date = new Date(pJson.exp * 1000);
 
       // get current time
       let current_date = new Date();
+
+      console.log("Current date hours: " + current_date.getHours());
+      console.log("Expiration date hours: " + exp_date.getHours());
       
       // check hours first if our current hour is greater than the exp date we know it is expired
-      if(current_date.getHours() > exp_date.getHours()) {
+      if(current_date.getHours() > exp_date.getHours() && exp_date.getHours() != 0) {
+        console.log("Failing in hours");
         res.status(401).json({error: 'Not authenticated'});
         return;
       }
@@ -62,11 +67,14 @@ exports.TokenMiddleware = (req, res, next) => {
 
       // if we have the same hour check the minutes to verify if we have hit the exp date
       if(current_date.getHours() == exp_date.getHours()) {
+        console.log("Failing in second check!");
         if(current_date.getMinutes() > exp_date.getMinutes()) {
           res.status(401).json({error: 'Not authenticated'});
           return;
         }
       }
+
+      console.log("We passed!");
     }
 
     else {

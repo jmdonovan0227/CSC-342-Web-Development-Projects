@@ -4,7 +4,7 @@ const API_BASE = '/api';
 
 export default {
   getCurrentUser: () => {
-    return HTTPClient.get(API_BASE+'/users/current');
+    return HTTPClient.get(API_BASE + '/users/current');
   },
 
   logIn: (username, password) => {
@@ -13,10 +13,10 @@ export default {
       password: password
     }
 
-    return HTTPClient.post(API_BASE+'/users/login', data);
+    return HTTPClient.post(API_BASE + '/users/login', data);
   },
 
   logOut: () => {
-    return HTTPClient.post(API_BASE+'/users/logout', {});
+    return HTTPClient.post(API_BASE + '/users/logout', {});
   }
 };
