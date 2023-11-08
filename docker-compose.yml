@@ -41,4 +41,4 @@ services:
     - ./Homework5/templates:/app/templates
     - ./Homework5/src:/app/src
     env_file:
-    - ./Homework5/.env
+    - ./Homework5/.env_sample
