@@ -51,16 +51,20 @@ footer {
     background-color: rgb(173, 173, 173);
 }
 
-#followingList {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
+.scroll {
+    height: 275px;
     width: 750px;
-    height: 200px;
     overflow-y: scroll;
     border: 4px solid black;
     border-radius: 5%;
+}
+
+.followingList {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    height: 100%;
+    width: 100%;
 }
 
 label {
@@ -68,6 +72,15 @@ label {
     margin-left: 15px;
     font-style: italic;
     font-weight: bold;
+}
+
+.labelDiv {
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid rgb(196, 196, 196);
+    margin-bottom: 5px;
 }
 
 .userInfo {
@@ -99,7 +112,9 @@ label {
 }
 
 .followingDivs {
+    position: relative;
     display: flex;
+    height: 75px;
     justify-content: flex-start;
     align-items: center;
     border: 2px solid rgb(196, 196, 196);

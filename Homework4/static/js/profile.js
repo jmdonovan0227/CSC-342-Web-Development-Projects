@@ -111,28 +111,48 @@ function createHeader(user) {
 function getUserFollowers() {
     // get all users followed on user's page
     api.getUserFollowersByID(id).then(followers => {
-        for(let i = 0; i < followers.following.length; i++ ) {
-            let f = followers.following[i];
-            api.getUserByID(f).then(f_user => {
-                let main_div = document.createElement('div');
-                main_div.classList.add('followingDivs');
-                let user_image = document.createElement('img');
-                user_image.src = f_user.avatar;
+        api.getUsers().then(users => {
+            for(let i = 0; i < followers.following.length; i++ ) {
+                let user = users.find(user => user.id == followers.following[i]);
+                console.log(user);
 
-                user_image.addEventListener('click', (e) => {
-                    window.location = "profile?id=" + f_user.id;
-                });
+                if( i == 0 ) {
+                    let main_div = document.createElement('div');
+                    main_div.classList.add('followingDivs');
+                    let user_image = document.createElement('img');
+                    user_image.src = user.avatar;
+    
+                    user_image.addEventListener('click', (e) => {
+                        window.location = "profile?id=" + user.id;
+                    });
+    
+                    let user_name = document.createElement('a');
+                    user_name.innerHTML = "@" + user.username;
+                    user_name.href = 'profile?id=' + user.id;
+                    main_div.appendChild(user_image);
+                    main_div.appendChild(user_name);
+                    document.querySelector(".followingList").appendChild(main_div);
+                }
 
-                let user_name = document.createElement('a');
-                user_name.innerHTML = "@" + f_user.username;
-                user_name.href = 'profile?id=' + f_user.id;
-                main_div.appendChild(user_image);
-                main_div.appendChild(user_name);
-                document.querySelector("#followingList").append(main_div);
-            }).catch(err => {
-                console.log("Something went wrong!");
-            });
-        }
+                else {
+                    let main_div = document.createElement('div');
+                    main_div.classList.add('followingDivs');
+                    let user_image = document.createElement('img');
+                    user_image.src = user.avatar;
+    
+                    user_image.addEventListener('click', (e) => {
+                        window.location = "profile?id=" + user.id;
+                    });
+    
+                    let user_name = document.createElement('a');
+                    user_name.innerHTML = "@" + user.username;
+                    user_name.href = 'profile?id=' + user.id;
+                    main_div.appendChild(user_image);
+                    main_div.appendChild(user_name);
+                    document.querySelector(".followingList").appendChild(main_div);
+                }
+            }
+        });
     }).catch(err => {
         console.log("Can't get followers!");
     });
