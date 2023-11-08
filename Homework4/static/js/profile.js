@@ -4,13 +4,13 @@ import api from "./APIClient.js";
 
 api.getCurrentUser().then(user => {
     let link = document.createElement('a');
-    link.href = '/profile?id=' + user.id;
+    link.href = 'profile?id=' + user.id;
     link.innerHTML = "@" + user.username;
     let profile_pic = document.createElement('img');
     profile_pic.src = user.avatar;
 
     profile_pic.addEventListener('click', (e) => {
-        window.location = '/profile?id=' + user.id;
+        window.location = 'profile?id=' + user.id;
     });
 
     document.getElementById('user').appendChild(link);
@@ -42,13 +42,13 @@ function createHeader(user) {
     profile_pic.src = user.avatar;
 
     profile_pic.addEventListener('click', (e) => {
-        document.location = '/profile?id=' + user.id;
+        document.location = 'profile?id=' + user.id;
     });
 
     let full_name = document.createElement('span');
     full_name.innerHTML = user.first_name + " " + user.last_name;
     let profile_link = document.createElement('a');
-    profile_link.href = '/profile?id=' + user.id;
+    profile_link.href = 'profile?id=' + user.id;
     profile_link.innerHTML = "@" + user.username;
     let main_div = document.createElement('div');
     main_div.classList.add('userInfo');
@@ -120,12 +120,12 @@ function getUserFollowers() {
                 user_image.src = f_user.avatar;
 
                 user_image.addEventListener('click', (e) => {
-                    window.location = "/profile?id=" + f_user.id;
+                    window.location = "profile?id=" + f_user.id;
                 });
 
                 let user_name = document.createElement('a');
                 user_name.innerHTML = "@" + f_user.username;
-                user_name.href = '/profile?id=' + f_user.id;
+                user_name.href = 'profile?id=' + f_user.id;
                 main_div.appendChild(user_image);
                 main_div.appendChild(user_name);
                 document.querySelector("#followingList").append(main_div);
@@ -164,7 +164,7 @@ function createHtml(sorted_howls) {
             full_name.innerHTML = user.first_name + " " + user.last_name;
             let profile_link = document.createElement('a');
             profile_link.innerHTML = "@" + user.username;
-            profile_link.href = "/profile?id=" + user.id;
+            profile_link.href = "profile?id=" + user.id;
             let date = document.createElement('span');
             let convert = new Date(howl.datetime);
             date.innerHTML = convert.toLocaleDateString() + ", " + convert.toLocaleTimeString();

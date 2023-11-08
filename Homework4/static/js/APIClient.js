@@ -1,6 +1,6 @@
 import HTTPClient from "./HTTPClient.js";
 
-const API_BASE = '/api';
+const API_BASE = 'api';
 
 // Make sure we have an API call for each endpoint in API Routes
 export default {
@@ -41,6 +41,10 @@ export default {
     // get the array of people that user with id follows
     getUserFollowersByID: (id) => {
         return HTTPClient.get(API_BASE + `/follows/${id}`);
+    },
+
+    getUsers: () => {
+        return HTTPClient.get(API_BASE + "/users");
     },
 
     //

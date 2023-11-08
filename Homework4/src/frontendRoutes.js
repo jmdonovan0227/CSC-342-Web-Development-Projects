@@ -1,6 +1,9 @@
 const express = require('express');
 const frontendRouter = express.Router();
 
+frontendRouter.use(express.static('static'));
+frontendRouter.use(express.urlencoded({extended:true}));
+
 const path = require('path');
 const html_dir = path.join(__dirname, '../templates/');
 

@@ -46,6 +46,7 @@ apiRouter.get('/users', SessionMiddleware, (req, res) => {
 apiRouter.post('/users/login', (req, res) => {
     // is username and password valid?
     // check if api route returns a user
+    console.log("here!");
     if( req.body.username ) {
         // Use UserDAO getUserByCredentials to get user object
         usersDAO.getUserByCredentials(req.body.username).then(user => {

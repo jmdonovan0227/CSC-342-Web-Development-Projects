@@ -8,8 +8,7 @@ loginButton.addEventListener('click', (e) => {
     console.log(username.value);
     console.log(password.value);
     api.logIn(username.value, password.value).then(userData => {
-        document.location = "/main";
-    }).catch((err) => {
-        console.log("Something went wrong logging in user...");
+        document.location = "main";
+    }).catch(err => {
     });
 });

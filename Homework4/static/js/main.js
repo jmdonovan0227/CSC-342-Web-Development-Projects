@@ -4,13 +4,13 @@ import api from "./APIClient.js";
 // profile picture and link to profile in top right of page
 api.getCurrentUser().then(user => {
     let link = document.createElement('a');
-    link.href = '/profile?id=' + user.id;
+    link.href = 'profile?id=' + user.id;
     link.innerHTML = "@" + user.username;
     let profile_pic = document.createElement('img');
     profile_pic.src = user.avatar;
 
     profile_pic.addEventListener('click', (e) => {
-        window.location = '/profile?id=' + user.id;
+        window.location = 'profile?id=' + user.id;
     });
 
     document.getElementById('user').appendChild(link);
@@ -23,7 +23,6 @@ api.getCurrentUser().then(user => {
 function update_list(id) {
     // get users that current user follows
     api.getUserFollowersByID(id).then(followedUsers => {
-        console.log(followedUsers);
         // get all howls
         api.getHowls().then(allHowls => {
             // filter all howls by people our user follows check first if the current howl's id is held
@@ -39,7 +38,6 @@ function update_list(id) {
                 sortedHowls.reverse();
                 //
                 console.log(sortedHowls);
-
                 // start creating elements and display on page
                 createMessages(sortedHowls);
             }).catch(err => {
@@ -56,30 +54,36 @@ function update_list(id) {
 function createMessages(sortedHowls) {
     // clear current content
     document.querySelector("#messages").innerHTML = "";
-    let idx = 0;
-    for(let i = 0; i < sortedHowls.length; i++ ) {
-        let id = sortedHowls[i].userId;
-        // get the user by id
-        api.getUserByID(id).then(user => {
-            console.log(idx);
-            let howl = sortedHowls[idx];
+
+    api.getUsers().then(usersList => {
+        let loopIdx = 0;
+
+        while(loopIdx != sortedHowls.length ) {
+            let id = sortedHowls[loopIdx].userId;
+            console.log("Howl User ID: " + id);
+            let howl = sortedHowls[loopIdx];
+
+            let user = usersList.find(user => user.id == id);
+            console.log("User ID: " + user.id );
+        
+            // let howl = sortedHowls[idx];
             let div_one = document.createElement('div');
-            div_one.classList.add('userInfo');
+            div_one.classList.add('userInfo')
             let main_div = document.createElement('div');
             main_div.classList.add('mainDiv');
-        
+    
             let profile_picture = document.createElement('img');
             profile_picture.src = user.avatar;
 
             profile_picture.addEventListener('click', (e) => {
-                window.location = '/profile?id=' + howl.userId;
+                window.location = 'profile?id=' + user.id;
             });
 
             let full_name = document.createElement('span');
             full_name.innerHTML = user.first_name + " " + user.last_name;
             let profile_link = document.createElement('a');
             profile_link.innerHTML = "@" + user.username;
-            profile_link.href = '/profile?id=' + user.id;
+            profile_link.href = 'profile?id=' + user.id;
             let date = document.createElement('span');
             let convert = new Date(howl.datetime);
             date.innerHTML = convert.toLocaleDateString() + ", " + convert.toLocaleTimeString();
@@ -102,11 +106,20 @@ function createMessages(sortedHowls) {
             main_div.appendChild(div_one);
             main_div.appendChild(div_two);
             document.getElementById("messages").append(main_div);
-            idx++;
-        }).catch(err => {
-            console.log("Can't find user with id");
-        });
-    }
+            // get the user by id
+            loopIdx++;
+        }
+    });
+}
+
+function createHowls(id, howl) {
+    api.getUserByID(id).then(user => {
+
+    }).catch(err => {
+        console.log("Can't find user with id");
+    });
+
+    return;
 }
 
 let button = document.querySelector("#howlButton");
