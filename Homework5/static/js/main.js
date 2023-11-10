@@ -18,7 +18,7 @@ api.getCurrentUser().then(user => {
 
     button.addEventListener('click', (e) => {
         api.logOut().then(res => {
-            window.location = '/';
+            window.location = 'login';
         });
     });
 
@@ -29,11 +29,4 @@ api.getCurrentUser().then(user => {
     document.querySelector(".welcome").appendChild(welcome_header);
 }).catch(error => {
     //
-});
-
-const user = document.querySelector("#user");
-const dropdown = document.querySelector("#menu");
-
-user.addEventListener('click', (e) => {
-    dropdown.style.display = "flex";
 });
