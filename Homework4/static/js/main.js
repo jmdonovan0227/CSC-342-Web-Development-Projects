@@ -112,16 +112,6 @@ function createMessages(sortedHowls) {
     });
 }
 
-function createHowls(id, howl) {
-    api.getUserByID(id).then(user => {
-
-    }).catch(err => {
-        console.log("Can't find user with id");
-    });
-
-    return;
-}
-
 let button = document.querySelector("#howlButton");
 
 button.addEventListener('click', (e) => {
