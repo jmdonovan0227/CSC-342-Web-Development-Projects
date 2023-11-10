@@ -18,7 +18,7 @@ api.getCurrentUser().then(user => {
 
     button.addEventListener('click', (e) => {
         api.logOut().then(res => {
-            window.location = 'login';
+            document.location = '/';
         });
     });
 
