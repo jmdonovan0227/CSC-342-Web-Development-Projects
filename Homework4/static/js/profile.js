@@ -10,7 +10,7 @@ api.getCurrentUser().then(user => {
     profile_pic.src = user.avatar;
 
     profile_pic.addEventListener('click', (e) => {
-        window.location = 'profile?id=' + user.id;
+        document.location = 'profile?id=' + user.id;
     });
 
     document.getElementById('user').appendChild(link);
@@ -123,7 +123,7 @@ function getUserFollowers() {
                     user_image.src = user.avatar;
     
                     user_image.addEventListener('click', (e) => {
-                        window.location = "profile?id=" + user.id;
+                        document.location = "profile?id=" + user.id;
                     });
     
                     let user_name = document.createElement('a');
@@ -141,7 +141,7 @@ function getUserFollowers() {
                     user_image.src = user.avatar;
     
                     user_image.addEventListener('click', (e) => {
-                        window.location = "profile?id=" + user.id;
+                        document.location = "profile?id=" + user.id;
                     });
     
                     let user_name = document.createElement('a');

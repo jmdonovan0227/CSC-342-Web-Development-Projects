@@ -10,7 +10,7 @@ api.getCurrentUser().then(user => {
     profile_pic.src = user.avatar;
 
     profile_pic.addEventListener('click', (e) => {
-        window.location = 'profile?id=' + user.id;
+        document.location = 'profile?id=' + user.id;
     });
 
     document.getElementById('user').appendChild(link);
@@ -76,7 +76,7 @@ function createMessages(sortedHowls) {
             profile_picture.src = user.avatar;
 
             profile_picture.addEventListener('click', (e) => {
-                window.location = 'profile?id=' + user.id;
+                document.location = 'profile?id=' + user.id;
             });
 
             let full_name = document.createElement('span');
