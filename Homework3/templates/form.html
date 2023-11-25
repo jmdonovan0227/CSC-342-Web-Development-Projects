@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <form action="formdata" enctype="multipart/form-data" method="post">
+    <form method="post" enctype="multipart/form-data" action="formdata">
     <div class="senderDetails">
         <div class="browse">
             <h1>Sender Details</h1>
@@ -16,7 +16,7 @@
                 <input placeholder="picture.png" readonly id="fileText" type="text" name="file" required/>
                 <label id="browseLabel" for="fileSelect" required>
                 Browse
-                <input id="fileSelect" type="file" accept=".png, .jpeg, .jpg" onchange="previewImage(event)"/>
+                <input id="fileSelect" type="file" accept=".png, .jpeg, .jpg" onchange="previewImage(event)" name="myfile"/>
                 </label>
             </div>
             <div id="err1"></div>
@@ -57,11 +57,11 @@
             </div>
 
             <div class="notifyButtons">
-                <input id="emailRadio" name="email_button" type="radio"/>
+                <input id="emailRadio" name="email_radio_button" type="radio"/>
                 <label>Email</label>
-                <input id="smsRadio" name="sms_button" type="radio"/>
+                <input id="smsRadio" name="sms_radio_button" type="radio"/>
                 <label>SMS</label>
-                <input id="dnotRadio" name="dno_button" type="radio"/>
+                <input id="dnotRadio" name="dno_radio_button" type="radio"/>
                 <label>Do not notify</label>
                 <div id="err4"></div>
             </div>

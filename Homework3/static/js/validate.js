@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', (e) => {
         // first names and last names should be check to make sure there are no numbers
         if( /\d/.test(s_first.value)  || /\d/.test(s_last.value) || /\d/.test(r_first.value) || /\d/.test(r_last.value)) {
             e.preventDefault();
-            alert("Please only use letters for names")
+            alert("Please only use letters for names");
         }
 
         else if( s_first.value.length < 1 || s_last.value.length < 1 || r_first.value.length < 1 || r_last.value.length < 1 ) {
             e.preventDefault();
-            alert("Please enter first and last names for sender and recipient")
+            alert("Please enter first and last names for sender and recipient");
         }
 
         else if( message.value.length < 10 ) {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         // names are valid
         else {
             // check that we have a valid picture
-            if(!file.value.match("[a-zA-Z0-9.-_].png") && !file.value.match("[a-zA-Z0-9.-_].jpeg") && !file.value.match("[a-zA-Z0-9.-_].jpg")) {
+            if(file.value == "" || (!file.value.endsWith(".png") && !file.value.endsWith(".jpeg") && !file.value.endsWith(".jpg"))) {
                 // other code will return an empty string if the file type is not valid
                 e.preventDefault();
                 //
@@ -48,38 +48,24 @@ document.addEventListener('DOMContentLoaded', (e) => {
             // picture is valid
             else {
                 // next check if any radio buttons are checked
-                if(e_radio.checked && ( email.value == "" || !email.value.match("[a-zA-Z0-9.]+@[a-z]+.com"))) {
-                    if( email.value == "" ) {
-                        e.preventDefault();
-                        alert("Please provide an email address");
-                    }
-
-                    else {
-                        e.preventDefault();
-                        alert("Please provide a valid email address");
-                    }
+                if(e_radio.checked && (email.value == "" || (!email.value.match("[a-zA-Z0-9.]+@[a-z]+.com") && !email.value.match("[a-zA-Z0-9.]+@[a-z]+.edu")))) {
+                    e.preventDefault();
+                    alert("Please provide a valid email address");
                 }
 
                 // check if sms is checked
                 else {
                     if(s_radio.checked && ( p_number.value == "" || ( !p_number.value.match("[0-9]{3}-[0-9]{3}-[0-9]{4}") && !p_number.value.match("[0-9]{10}") ) ) ) {
-                        if(p_number.value == "") {
-                            e.preventDefault();
-                            alert("Please enter a phone number");
-                        }
-
-                        else {
-                            e.preventDefault();
-                            alert("Please enter a valid phone number");
-                        }
+                        e.preventDefault();
+                        alert("Please enter a valid phone number");
                     }
 
-                    else if(p_number.value.match("[0-9]{3}-[0-9]{3}-[0-9]{4}") && p_number.value.length > 12 ) {
+                    else if(s_radio.checked && p_number.value.match("[0-9]{3}-[0-9]{3}-[0-9]{4}") && p_number.value.length > 12 ) {
                         e.preventDefault();
                         alert("Please enter a phone number with 10 digits");
                     }
 
-                    else if(p_number.value.match("[0-9]{10}") && p_number.value.length > 10 ) {
+                    else if(s_radio.checked && p_number.value.match("[0-9]{10}") && p_number.value.length > 10 ) {
                         e.preventDefault();
                         alert("Please enter a phone number with 10 digits");
                     }
@@ -87,7 +73,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                     // now check payment details
                     else {
                         // first check the card number
-                        if( !c_number.value.match("[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}") && !c_number.value.match("[0-9]{16}")) {
+                        if( c_number.value == "" || (!c_number.value.match("[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}") && !c_number.value.match("[0-9]{16}"))) {
                             e.preventDefault();
                             alert("Please enter a valid card number");
                         }
@@ -106,11 +92,12 @@ document.addEventListener('DOMContentLoaded', (e) => {
                             // next check the date is valid
                             // create a current date for testing
                             let test_date = new Date();
-                            //console.log(date.value);
-                            //console.log(test_date.toISOString());
-                            //console.log(new Date(date.value).toISOString());
+                            if(date.value != ""){
+                                card_date = new Date(date.value);
+                                card_date.setHours(card_date.getHours() + card_date.getTimezoneOffset() / 60, card_date.getMinutes(), card_date.getSeconds());
+                            }
 
-                            if(date.value == "" || new Date(date.value).toISOString() < test_date.toISOString()) {
+                            if(date.value == "" || card_date < test_date) {
                                 if( date.value == "") {
                                     e.preventDefault();
                                     alert("Please enter a date!");
@@ -123,7 +110,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                             }
 
                             else {
-                                if( !ccv.value.match("[0-9]") || ( ccv.value.match("[0-9]") && ( ccv.value.length < 3 || ccv.value.length > 4 ) ) ) {
+                                if( ccv.value == "" || !ccv.value.match("[0-9]") || ( ccv.value.match("[0-9]") && ( ccv.value.length < 3 || ccv.value.length > 4 ) ) ) {
                                     if(ccv.value == "") {
                                         e.preventDefault();
                                         alert("Please enter ccv code");
@@ -136,7 +123,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                                 }
 
                                 else {
-                                    if(isNaN(amount.value)) {
+                                    if(isNaN(amount.value) || amount.value == "") {
                                         if(amount.value == "") {
                                             e.preventDefault();
                                             alert("Please enter payment...");
