@@ -5,7 +5,7 @@ services:
     volumes:
       - ./proxy/default.conf.template:/etc/nginx/templates/default.conf.template
     ports:
-      - "80:80"
+      - "3000:3000"
 
   hw1:
     image: httpd:latest

@@ -6,6 +6,6 @@ COPY . .
 
 RUN npm install
 
-ENV PORT 80
+ENV PORT 3000
 
 ENTRYPOINT [ "npm", "start" ]
