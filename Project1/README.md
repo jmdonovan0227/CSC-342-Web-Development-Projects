@@ -1,4 +1,4 @@
-# Homework 1 - Static Websites
+# Project 1 - Static Websites
 
 ## [Go Back](../README.md)
 

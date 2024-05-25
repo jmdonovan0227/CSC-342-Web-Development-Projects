@@ -1,4 +1,4 @@
-# Homework 3 - Pay Your Friends
+# Project 3 - Pay Your Friends
 
 ## [Go Back](../README.md)
 
