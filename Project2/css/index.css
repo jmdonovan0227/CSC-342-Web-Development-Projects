@@ -14,7 +14,7 @@
 #inputfield:focus {
     /** style the outline of the text box when we click on it to make it stick out a bit */
     /** NOTE outlines are different than borders, they draw outside an element's border */
-    outline: 1px solid rgb(87, 87, 87);
+    outline: 2px solid rgb(87, 87, 87);
 }
 
 /**
@@ -78,18 +78,17 @@ div.flexContainer {
 }
 
 /** Put input text box and all other buttons in column 1 of main grid */
-#calculatorFunctions {
+.calculatorFunctions {
     grid-column: 1;
+    display: flex;
+    justify-content: end;
 }
 
 /** Position our calculator history which includes clear history button and list in column 2 of our main grid */
 .calculatorHistory {
     grid-column: 2;
-}
-
-/** Increase right margin to position our calculator history section of the grid */
-div.calculatorHistory {
-    margin-right: 475px;
+    display: flex;
+    justify-content: start;
 }
 
 /** Create a grid to organize our clear history button and our history list for the results of previous computations */

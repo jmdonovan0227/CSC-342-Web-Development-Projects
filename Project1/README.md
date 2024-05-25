@@ -5,10 +5,10 @@
 ## How To Run
 
     1) Open a terminal in VSCode by selecting 'Terminal' and selecting 'New Terminal' or open a git bash terminal (where you have stored this git repo).
-    2) Next, use 'cd Homework 1' to navigate inside of the homework 1 folder.
+    2) Next, use 'cd Project1' to navigate inside of the project 1 folder.
     3) Next, build a docker image with the command 'docker compose up --build' (if you have already down this before, just type 'docker compose up')
     4) Wait a few moments until the terminal prints some output and can you see that our project is running on localhost:80
-    5) In your browser of choice, type 'localhost:80'. The default project is hw1. To view these html pages, click on part 1 or part 2 links. Other projects can also be accessed from this point by appending '/hw#' => ex: localhost:80/ takes you to hw1 by default as '/' is the default path. So to go to hw2 => type this link in your browser => locahost:80/hw2.
+    5) In your browser of choice, type 'localhost:80'. The default project is p1. To view these html pages, click on part 1 or part 2 links. Other projects can also be accessed from this point by appending '/p#' => ex: localhost:80/ takes you to p1 by default as '/' is the default path. So to go to p2 => type this link in your browser => locahost:80/p2.
 
 ## Description
 
@@ -17,7 +17,7 @@
 
 ## Technologies
 
-- CSS, HTML, Flexbox, CSS Grid, Google Fonts, NPM.
+- CSS, HTML, Flexbox, CSS Grid, Google Fonts.
 
 ## Citations
 

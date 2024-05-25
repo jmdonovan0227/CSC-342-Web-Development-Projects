@@ -5,10 +5,13 @@
 ## How To Run
 
     1) Open a terminal in VSCode by selecting 'Terminal' and selecting 'New Terminal' or open a git bash terminal (where you have stored this git repo).
-    2) Next, use 'cd Homework 1' to navigate inside of the homework 1 folder.
+    2) Next, use 'cd Project1' to navigate inside of the project 1 folder.
     3) Next, build a docker image with the command 'docker compose up --build' (if you have already down this before, just type 'docker compose up')
     4) Wait a few moments until the terminal prints some output and can you see that our project is running on localhost:80
-    5) In your browser of choice, type 'localhost:80'. The default project is hw1. To view these html pages, click on part 1 or part 2 links. Other projects can also be accessed from this point by appending '/hw#' => ex: localhost:80/ takes you to hw1 by default as '/' is the default path. So to go to hw2 => type this link in your browser => locahost:80/hw2.
+    5) In your browser of choice, type 'localhost:80'. The default project is p1. To view these html pages, click on part 1 or part 2 links. Other projects can also be accessed from this point by appending '/p#' => ex: localhost:80/ takes you to p1 by default as '/' is the default path. So to go to p2 => type this link in your browser => locahost:80/p2.
+    6) To be able to login using JWT token authentication you need to define a .env file within the Project 5 folder. The .env file should sit outside of all other folders at the same level as README.md. You only need to define an "API_SECRET". To see how your .env file needs to be setup, use .env_sample for reference. Remember you need to create '.env' with the same setup as '.env_sample'.
+    7) Next, change the env_file under proxy in docker-compose.yml to look for .env file in the Project 5 directory. It is currently using the sample '.env_sample' which is only a placeholder to allow docker to run when the API_SECRET is not defined.
+    8) To login, you need a valid username and password. A valid username is 'student' and a valid password is 'password'. This is a very basic implementation of a login system with JWT Token Authentication. There is only one valid user currently in the system.
 
 ## Description
 
