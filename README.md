@@ -6,7 +6,7 @@
 
 ## Project Links
 
-### [Setup](#)
+### [Setup](./Setup/README.md)
 
 - Setup (folder) focuses on setting up our environment and installing all packages in order to run Homework 1 through 5. Click the link above to learn more!
 
