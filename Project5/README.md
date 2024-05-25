@@ -1,4 +1,4 @@
-# Homework 5 - Authentication with JWT
+# Project 5 - Authentication with JWT
 
 ## [Go Back](../README.md)
 

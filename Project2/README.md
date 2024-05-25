@@ -1,4 +1,4 @@
-# Homework 2 - Basic Calculator
+# Project 2 - Basic Calculator
 
 ## [Go Back](../README.md)
 
