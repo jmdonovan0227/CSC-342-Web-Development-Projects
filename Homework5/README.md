@@ -1,6 +1,19 @@
-1. An interesting challenge you encountered when implementing JTW algorithms. What was the issue and how did you solve it?
-    One of the most challenging aspects to this assignment for me was trying to figure out how to generate a valid JTW object for users
-    that I could then use for validation. JWT.io was very helpful for helping me figure out if my token was valid while trying to figure out how to create the token. To solve this issue I created a hmac using the Crypto packages with the special key. I then used base62url on a header that I created that has the type and algorithm used for hashing (like standard JWT). I then hashed the data object in login which contained information about the expiration of the login session and also the user object (aka the payload). I got stuck for a while on generating the signature until I realized I was right and I just needed to enter my special key to validate on JWT.io. Overall, figure out how to create JWT was challenging but it was interesting and seems to be a useful topic to have knowledge of in the workforce so I am grateful to have learned a little bit about it.
+# Homework 5 - Authentication with JWT
 
-2. What security risks/vulnerabilities/weaknesses, if any, are present in your implementation? How can they be exploited and what are some ways to fix them? Are there any tradeoffs if you implement any of the fixes?
-    I can't think of any major vulnerabilities, but I wonder if the payload might be at risk of being attacked. I thought of the idea that if a person hacked into a user's account and they could adjust the expiration date so they could have access to the account as long as they needed to dig through their account for stealing personal information. I am not sure if this currently a vulnerability but I think it is a possible weakness of the current implemenation of my program.
+## [Go Back](./README.md)
+
+## How To Run
+
+    1) Open a terminal in VSCode by selecting 'Terminal' and selecting 'New Terminal' or open a git bash terminal (where you have stored this git repo).
+    2) Next, use 'cd Homework 1' to navigate inside of the homework 1 folder.
+    3) Next, build a docker image with the command 'docker compose up --build' (if you have already down this before, just type 'docker compose up')
+    4) Wait a few moments until the terminal prints some output and can you see that our project is running on localhost:80
+    5) In your browser of choice, type 'localhost:80'. The default project is hw1. To view these html pages, click on part 1 or part 2 links. Other projects can also be accessed from this point by appending '/hw#' => ex: localhost:80/ takes you to hw1 by default as '/' is the default path. So to go to hw2 => type this link in your browser => locahost:80/hw2.
+
+## Description
+
+- On the frontend, this project just consists of a login and home page. Once the user is authenticated, they should be able to view the homepage and logout. On the backend we authenticate the user with JWT tokens. We did not user the jwt library, but created the tokens ourselves. To achieve this, we use the base64url library, which we used to encode the header and the payload. We then created a JWT signature with SHA-256 hashing algorithm. We used the crypto package from Node.js to compute an HMAC. We use a middleware module that will read the token from a cookie (HTTP-only cookie) and validate it. We first check that JWT header and payload match, then we check an 'exp' field to make sure the token is not expired. I also confirmed that the jwt tokens generated are valid using JWT.io (to make sure that they are compliant JWTs).
+
+## Technologies
+
+- Docker, REST api endpoints, HTML, CSS, JS, Express, NPM, base64url, crypto.
