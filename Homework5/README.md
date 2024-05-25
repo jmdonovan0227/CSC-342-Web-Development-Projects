@@ -1,6 +1,6 @@
 # Homework 5 - Authentication with JWT
 
-## [Go Back](./README.md)
+## [Go Back](../README.md)
 
 ## How To Run
 

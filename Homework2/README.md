@@ -1,6 +1,6 @@
 # Homework 2 - Basic Calculator
 
-## [Go Back](./README.md)
+## [Go Back](../README.md)
 
 ## How To Run
 

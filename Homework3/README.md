@@ -1,6 +1,6 @@
 # Homework 3 - Pay Your Friends
 
-## [Go Back](./README.md)
+## [Go Back](../README.md)
 
 ## How To Run
 
