@@ -1,7 +1,6 @@
 const crypto = require('crypto');
 const base64url = require('base64url');
-
-const TOKEN_COOKIE_NAME = "Homework5";
+const TOKEN_COOKIE_NAME = "Project5";
 // In a real application, you will never hard-code this secret and you will
 // definitely never commit it to version control, ever
 
