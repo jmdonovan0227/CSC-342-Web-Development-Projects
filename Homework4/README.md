@@ -1,6 +1,6 @@
 # Homework 4 - Howler
 
-## [Go Back](./README.md)
+## [Go Back](../README.md)
 
 ## How To Run
 

@@ -1,6 +1,6 @@
 # Setup Guide
 
-## [Go Back](README.md)
+## [Go Back](../README.md)
 
 ## Required Downloads
 

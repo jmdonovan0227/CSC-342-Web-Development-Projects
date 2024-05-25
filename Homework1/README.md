@@ -1,6 +1,6 @@
 # Homework 1 - Static Websites
 
-## [Go Back](./README.md)
+## [Go Back](../README.md)
 
 ## How To Run
 
