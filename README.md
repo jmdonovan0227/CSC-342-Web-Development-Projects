@@ -26,6 +26,6 @@
 
 - In this project, we create a social media app (kind of like twitter) where we have a login page, a main page where the current user can post and view messages, and profile pages for the current user and other users that we can follow/unfollow. Click the link above to learn more!
 
-### [Project 5 - Authentication With JWT](./Homework5/README.md)
+### [Project 5 - Authentication With JWT](./Project5/README.md)
 
 - In this project our main focus in JWT token authentication. We have a simple login page and home page for the frontend and we create our own jwt tokens to authenticate users. Click the link above to learn more!
